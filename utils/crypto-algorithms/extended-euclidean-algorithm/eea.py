@@ -7,3 +7,5 @@ def eea(a, b):
 	return gcd, y1, x1-(a//b)*y1
 
 print(eea(3, 13))
+
+# pow(a, p-2, p) will also generate the multiplicate inverse of a modulo p
