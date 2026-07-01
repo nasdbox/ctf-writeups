@@ -1,0 +1,38 @@
+asm1:
+	<+0>:	endbr32 
+	<+4>:	push   ebp
+	<+5>:	mov    ebp,esp
+	<+7>:	cmp    DWORD PTR [ebp+0x8],0x753
+	<+14>:	jg     0x11d6 <asm1+41>
+	<+16>:	cmp    DWORD PTR [ebp+0x8],0x5af
+	<+23>:	jne    0x11ce <asm1+33>
+	<+25>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+28>:	add    eax,0x7
+	<+31>:	jmp    0x11ed <asm1+64>
+	<+33>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+36>:	sub    eax,0x7
+	<+39>:	jmp    0x11ed <asm1+64>
+	<+41>:	cmp    DWORD PTR [ebp+0x8],0x907
+	<+48>:	jne    0x11e7 <asm1+58>
+	<+50>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+53>:	sub    eax,0x7
+	<+56>:	jmp    0x11ed <asm1+64>
+	<+58>:	mov    eax,DWORD PTR [ebp+0x8]
+	<+61>:	add    eax,0x7
+	<+64>:	pop    ebp
+	<+65>:	ret    
+
+
+def asm1(arg):
+    # <+7>: Compare input to 0x753
+    if arg > 0x753: # <+14>: jg 0x11d6
+        if arg != 0x907: # <+48>: jne 0x11e7
+            return arg + 0x7 # <+58> to <+61>
+        else:
+            return arg - 0x7 # <+50> to <+53>
+    else:
+        # If NOT greater than 0x753, code continues here linearly
+        if arg != 0x5af: # <+23>: jne 0x11ce
+            return arg - 0x7 # <+33> to <+36>  <-- 0x2ff goes here
+        else:
+            return arg + 0x7 # <+25> to <+28>
